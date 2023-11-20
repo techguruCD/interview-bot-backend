@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "7ac4f194-6862-44b6-8c50-7ebcc9849c11",
+		"name": "interview_bot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29384314"
+	},
+	"item": [
+		{
+			"name": "sign up (email)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"name\": \"neil\",\r\n     \"email\":\"neil123@gmail.com\",\r\n     \"password\":\"123456789\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/signup_email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"signup_email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login_email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"neil123@gmail.com\",\r\n    \"password\":\"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login_email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login_email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "social login (google)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"access_token\":\"ya29.a0AfB_byBuK09RYp4XBVfU4Fw3jRgrSMN60p026TsME70W1ojp8bs3s8ij72rW2LRijA-H5LTsjKB8Cjuj8z0iFMxs6BY4WZmy7TmySFfi3RojAixp3t9vYUTlLswfRGWgG2o0SuDKJ1eJ2hVn4p-VYX8QNzP0bD8UVCsaCgYKAb8SARESFQGOcNnC6mCkmGEVlRltae_aO8_gfw0170\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://20.53.226.204:5000/social_login_google",
+					"protocol": "http",
+					"host": [
+						"20",
+						"53",
+						"226",
+						"204"
+					],
+					"port": "5000",
+					"path": [
+						"social_login_google"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setup_bot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDcyMjEwZDEtZTljYS00MDlmLTg2YTItZmNiZDYxNTEyM2NjIiwiZXhwIjoxNjk3MTE0NDc3fQ.kBLnULDRH55emgF3ECFaXaCnmMM_I83YkSwiJwCRbR0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tone",
+							"value": "professional",
+							"type": "text"
+						},
+						{
+							"key": "style",
+							"value": "decent",
+							"type": "text"
+						},
+						{
+							"key": "strength_weakness",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "challenges",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "about",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "cv",
+							"type": "file",
+							"src": "/C:/Users/Wajiha Ilyas/Downloads/Neil_Aitken_CV_May_2023.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/setup_bot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"setup_bot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "social login (linkedin)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"access_token\":\"AQVsfRTOAsHy04eJFj-GwGPE9YzaYnRVn-LfIu5jjsnFECqu13fcZVsv7RjopB2WWY4vThSirpYlnNOkDDJbdmOfY5MthzohmqZhkhoCl5a6IgdSDGxQrQoFQ7wrCCOho4385uVjpQV5QojzRmejAnjFdDmDsXsXeh1RSOaCvD4OQfpJrCpxvpF9vOY7GAvJv9WGIJtstwP1Ha-FLoT7nC2yVBnTaXP2oH7hjoUazFfyHIvulkbiDHxq3eC6bEnJmzM_-gXIkHrj2k-8oo4jZY_ZI5qF_dTQx92Ek2GVS91Wfvnm5zv4xnNYKIP-wFs9IcGQnU74PoPGPTWFVQrBt65ykdJ8xg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://20.53.226.204:5000/social_login_linkedin",
+					"protocol": "http",
+					"host": [
+						"20",
+						"53",
+						"226",
+						"204"
+					],
+					"port": "5000",
+					"path": [
+						"social_login_linkedin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzU3MDg3ZGMtZTA2Mi00ZGFlLThkMDUtYWQxN2Y3MDZkZThlIiwiZXhwIjoxNjk2Njc5NTkzfQ.1ehDoHKXNBsGj8XAMNNE3B01J-RDIPEXw4BvOqu1kCQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"full_name\":\"test2\",\r\n    \"headline\":\"tester2\",\r\n    \"linkedin\":\"xyz \",\r\n    \"about\":\"hi i am a tester2, im new here\",\r\n    \"avatar\":\"abc\",\r\n    \"image\":\"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAADklEQVR42mJ4DwABAAAAAgABaxR+AAAAASUVORK5CYII=\",\r\n    \"website\":\" \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://167.99.112.244:5000/profile",
+					"protocol": "http",
+					"host": [
+						"167",
+						"99",
+						"112",
+						"244"
+					],
+					"port": "5000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzU3MDg3ZGMtZTA2Mi00ZGFlLThkMDUtYWQxN2Y3MDZkZThlIiwiZXhwIjoxNjk2Njc5NTkzfQ.1ehDoHKXNBsGj8XAMNNE3B01J-RDIPEXw4BvOqu1kCQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://167.99.112.244:5000/profile",
+					"protocol": "http",
+					"host": [
+						"167",
+						"99",
+						"112",
+						"244"
+					],
+					"port": "5000",
+					"path": [
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDcyMjEwZDEtZTljYS00MDlmLTg2YTItZmNiZDYxNTEyM2NjIiwiZXhwIjoxNjk3MTE0NDc3fQ.kBLnULDRH55emgF3ECFaXaCnmMM_I83YkSwiJwCRbR0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\":\"tell me about yourself \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/bot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDcyMjEwZDEtZTljYS00MDlmLTg2YTItZmNiZDYxNTEyM2NjIiwiZXhwIjoxNjk3MTE0NDc3fQ.kBLnULDRH55emgF3ECFaXaCnmMM_I83YkSwiJwCRbR0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/bot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bot"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
