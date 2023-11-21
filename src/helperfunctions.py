@@ -21,7 +21,8 @@ def get_logger(name, level="DEBUG"):
 
 def initialize_app():
     app = Flask(__name__)
-    CORS(app=app, origins=["*"], expose_headers=["*"], vary_header=True)
+    # CORS(app=app, origins=["*"], expose_headers=["*"], vary_header=True)
+    CORS(app)
     # CORS(app, resources={r"/*": {"origins": "*"}})
     # CORS(app, resources={r"/*": {"origins": "*", "allow_headers": "*", "methods": "*"}})
     logger = get_logger(__name__)
