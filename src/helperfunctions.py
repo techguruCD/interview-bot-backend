@@ -21,8 +21,7 @@ def get_logger(name, level="DEBUG"):
 
 def initialize_app():
     app = Flask(__name__)
-    # CORS(app=app, origins=["*"], expose_headers=["*"], vary_header=True)
-    CORS(app)
+    CORS(app=app, origins=["*"], expose_headers=["*"], vary_header=True)
     # CORS(app, resources={r"/*": {"origins": "*"}})
     # CORS(app, resources={r"/*": {"origins": "*", "allow_headers": "*", "methods": "*"}})
     logger = get_logger(__name__)
@@ -57,11 +56,9 @@ def connect_pinecone(logger):
         index_name = "text-embeddings"
         pinecone.init(api_key=PINECONE_API_KEY, environment="gcp-starter")
         indexes = pinecone.list_indexes()
-        if index_name in indexes:
-            pinecone.delete_index(index_name)
         if index_name not in indexes:
-            pinecone.create_index(index_name, dimension=384, metric="cosine")
-            pinecone.describe_index(index_name)
+            pinecone.create_index("text-embeddings", dimension=384, metric="cosine")
+            pinecone.describe_index("text-embeddings")
         index = pinecone.Index(index_name)
         logger.info("connected to pinecone")
     except pinecone.core.exceptions.PineconeProtocolError as e:
