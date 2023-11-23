@@ -9,7 +9,11 @@ from config import *
 from constants import *
 from psycopg2 import sql
 from chatbot import *
-
+from flask import send_from_directory
+from werkzeug.utils import secure_filename
+from conversation import create_conversation
+from indexes import create_indexes, clear_indexes
+import time
 
 ACTIVE_SESSIONS = {}
 LLM_OBJECT = get_llm_object()
@@ -610,11 +614,94 @@ def get_public_data():
             exc_info=True,
         )
         return error_response(str(e))
+    
+@app.route('/create_indexes', methods=['POST'])
+def create_index():
+    # Extract data from the request
+    data = request.get_json()
+    file_names = data['file_names']
+    #how to get file with name of file_name in the assets folder?
+    files = []
+    for file_name in file_names:
+        file_path = os.path.join('assets', file_name)
+        files.append(file_path)
+    
+    pinecone_api_key = data['pinecone_api_key']
+    pinecone_environment = data['pinecone_environment']
+    pinecone_index_name = data['pinecone_index_name']
+    openai_api_key = data['openai_api_key']
+
+    # Call your existing function
+    result = create_indexes(files, pinecone_api_key, pinecone_environment, pinecone_index_name, openai_api_key)
+    print('result: ', result)
+
+    # Return the result as JSON
+    return jsonify(result)
+
+@app.route('/clear_indexes', methods=['POST'])
+def clear_index():
+    print('called')
+    # Extract data from the request
+    data = request.get_json()
+    pinecone_api_key = data['pinecone_api_key']
+    pinecone_environment = data['pinecone_environment']
+    pinecone_index_name = data['pinecone_index_name']
+
+    # Call your existing function
+    result = clear_indexes(pinecone_api_key, pinecone_environment, pinecone_index_name)
+
+    # Return the result as JSON
+    return jsonify(result)
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.get_json()
+    query = data['query']
+    chat_history = data['chat_history']
+    pinecone_api_key = data['pinecone_api_key']
+    pinecone_environment = data['pinecone_environment']
+    pinecone_index_name = data['pinecone_index_name']
+    openai_api_key = data['openai_api_key']
+    prompt = data['prompt']
+
+    result = create_conversation(query, pinecone_api_key, pinecone_environment, pinecone_index_name, openai_api_key, chat_history, prompt)
+
+    return jsonify(result)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    # Define the directory path
+    dir_path = os.path.join('assets')
+
+    # Check if the directory exists
+    if not os.path.exists(dir_path):
+        # Create the directory
+        os.makedirs(dir_path)
+
+    # Check if 'file' is in the uploaded files
+    if 'file' in request.files:
+        files = request.files.getlist('file')
+        filenames = []
+        for file in files:
+            timestamp = int(time.time())
+            filename = f"{timestamp}_{secure_filename(file.filename)}"
+            file.save(os.path.join(dir_path, filename))
+            filenames.append(filename)
+
+        return jsonify({"filenames": filenames, "message": 'Files uploaded successfully'})
+    
+    return jsonify({"message": "No files uploaded"})
+
+
+@app.route('/uploads/<filename>')
+def upload(filename):
+    dir_path = os.path.join('assets')
+    return send_from_directory(dir_path, filename)
 
 
 if __name__ == "__main__":
     try:
-        app.run(host="0.0.0.0", port=APP_PORT, debug=False)
+        app.run(host="0.0.0.0", port=APP_PORT, debug=True)
     except Exception as e:
         print(str(e))
     finally:

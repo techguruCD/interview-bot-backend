@@ -20,3 +20,5 @@ PyMuPDF
 Pillow
 tiktoken
 python-docx
+flask_cors
+gradio
