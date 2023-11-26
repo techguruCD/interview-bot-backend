@@ -701,7 +701,7 @@ def upload(filename):
 
 if __name__ == "__main__":
     try:
-        app.run(host="0.0.0.0", port=APP_PORT, debug=True)
+        app.run(host="0.0.0.0", port=APP_PORT, debug=False)
     except Exception as e:
         print(str(e))
     finally:
